@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disbaleb</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PUPSISDataLayer\PUPSISDataLayer.csproj" />
+    <ProjectReference Include="..\PUPSISModel\PUPSISModel.csproj" />
+  </ItemGroup>
+
+</Project>
