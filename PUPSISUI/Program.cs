@@ -1,6 +1,8 @@
 ﻿using System;
 using PUPSISModel;
 using PUPSISBusinessLogic;
+using PUPSISDataLayer;
+using System.Diagnostics;
 
 namespace PUPSISUI
 {
@@ -13,7 +15,7 @@ namespace PUPSISUI
             Console.WriteLine("Welcome to PUP Online Transaction");
             Console.WriteLine("\nEnter Student Number:  ");
             String studentNumber = Console.ReadLine();
-            Console.WriteLine("\nEnter Password:  ");
+            Console.WriteLine("Enter Password:  ");
             String password = Console.ReadLine();
 
             bool result = studentService.VerifyStudent(studentNumber, password);
@@ -21,7 +23,7 @@ namespace PUPSISUI
 
             if (result)
             {
-                Console.WriteLine("Welcome " + foundStudent.name + " " + foundStudent.section);
+                Console.WriteLine($"\nWelcome {foundStudent.name} || Current Section: {foundStudent.section}");
                 DisplayMenu(studentNumber);
             }
             else
@@ -30,30 +32,34 @@ namespace PUPSISUI
                 Main(args);
             }
         }
+
         public static void DisplayMenu(string studentNumber)
         {
             StudentBL studentService = new StudentBL();
-            Console.WriteLine("\nChoose a Number: ");
-            Console.WriteLine("1.Schedule\n2.Grades\n3.Pending Fee\n4.Log Out");
+            Console.WriteLine("\n____________________Choose a Number:____________________ \n1.Schedule  ||  2.Grades  ||  3.Pending Fee  ||  4.Log Out");
             byte choice = Convert.ToByte(Console.ReadLine());
             Student foundStudent = studentService.GetStudentBL(studentNumber);
 
             switch (choice)
             {
                 case 1:
+                    Console.WriteLine("Your Second Semester Schedule");
                     foreach (Schedule sched in foundStudent.schedule)
                     {
-
-                        Console.WriteLine("Subject: " + sched.subject + ", Room: " + sched.room + ", DateTime: "+sched.dateTime);
+                        Console.WriteLine($"Subject:{sched.subject}  ||Room:{sched.room}  ||Date and Time {sched.dateTime}");
                     }
                     DisplayMenu(studentNumber);
                     break;
                 case 2:
-                    Console.WriteLine(foundStudent.grade.subject1 + " " + foundStudent.grade.score1 + "\n" + foundStudent.grade.subject2 + " " + foundStudent.grade.score2 + "\n" + foundStudent.grade.subject3 + " " + foundStudent.grade.score3);
+                    Console.WriteLine("Your First Semester Grades");
+                    foreach (Grade grade in foundStudent.grade)
+                    {
+                        Console.WriteLine($"Subject:{grade.subject}||  Grades:{grade.score}");
+                    }
                     DisplayMenu(studentNumber);
                     break;
                 case 3:
-                    Console.WriteLine("Your " + foundStudent.fee.category + " " + foundStudent.fee.balance);
+                    Console.WriteLine($"Your {foundStudent.fee.category}: {foundStudent.fee.amount}");
                     DisplayMenu(studentNumber);
                     break;
                 case 4:
@@ -70,7 +76,6 @@ namespace PUPSISUI
                     }
                     else
                     {
-                        Console.WriteLine("I cannot understand what you input.Please choose again");
                         DisplayMenu(studentNumber);
                     }
                     break;

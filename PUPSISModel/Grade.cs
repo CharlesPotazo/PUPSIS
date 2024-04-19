@@ -8,11 +8,7 @@ namespace PUPSISModel
 {
     public class Grade
     {
-        public string subject1;
-        public double score1;
-        public string subject2;
-        public double score2;
-        public string subject3;
-        public double score3;
+        public string subject;
+        public double score;
     }
 }

@@ -9,7 +9,7 @@ namespace PUPSISModel
         public string section;
         public string studentNumber;
         public string password;
-        public Grade grade;
+        public List<Grade> grade;
         public List<Schedule> schedule;
         public Fee fee;
     }

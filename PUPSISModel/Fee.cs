@@ -8,7 +8,7 @@ namespace PUPSISModel
 {
     public class Fee
     {
-        public double balance;
+        public double amount;
         public string category;
     }
 }
